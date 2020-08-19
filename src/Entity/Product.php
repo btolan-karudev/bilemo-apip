@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  *     collectionOperations={"get"},
  *     itemOperations={
  *     "get"
+ *     },
+ *     shortName="phones",
+ *     attributes={
+ *          "pagination_items_per_page"=10
  *     }
  * )
  */

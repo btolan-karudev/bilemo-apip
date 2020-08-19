@@ -11,11 +11,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={"get", "post"},
  *     itemOperations={
- *     "get",
+ *     "get"={
+ *          "normalization_context"={"groups"={"customer_listing:read", "customer_listing:item:get"}}
+ *     },
  *     "patch",
  *     "delete",
  *     "put"
- *     }
+ *     },
+ *     normalizationContext={"groups"={"customer_listing:read"}},
+ *     denormalizationContext={"groups"={"customer_listing:write"}}
  * )
  */
 class Customer
@@ -29,12 +33,13 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read"})
+     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
      */
     private $lastName;
 
@@ -51,6 +56,7 @@ class Customer
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
      */
     private $user;
 
