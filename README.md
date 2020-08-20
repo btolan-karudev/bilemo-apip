@@ -1,24 +1,46 @@
 # bilemo-apip
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea353f99b6244646a632b442ee754386)](https://app.codacy.com/manual/btolan-karudev/bilemo-apip?utm_source=github.com&utm_medium=referral&utm_content=btolan-karudev/bilemo-apip&utm_campaign=Badge_Grade_Dashboard)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea353f99b6244646a632b442ee754386)](https://app.codacy.com/manual/btolan-karudev/bilemo-apip?utm_source=github.com&utm_medium=referral&utm_content=btolan-karudev/bilemo-apip&utm_campaign=Badge_Grade_Dashboard)
 
-Contexte
-BileMo est une entreprise offrant toute une sélection de téléphones mobiles haut de gamme.
 
-Vous êtes en charge du développement de la vitrine de téléphones mobiles de l’entreprise BileMo. Le business modèle de BileMo n’est pas de vendre directement ses produits sur le site web, mais de fournir à toutes les plateformes qui le souhaitent l’accès au catalogue via une API (Application Programming Interface). Il s’agit donc de vente exclusivement en B2B (business to business).
+## Setup
 
-Il va falloir que vous exposiez un certain nombre d’API pour que les applications des autres plateformes web puissent effectuer des opérations.
+If you've just downloaded the code, congratulations!!
 
-Besoin client
-Le premier client a enfin signé un contrat de partenariat avec BileMo ! C’est le branle-bas de combat pour répondre aux besoins de ce premier client qui va permettre de mettre en place l’ensemble des API et de les éprouver tout de suite.
+To get it working, follow these steps:
 
- Après une réunion dense avec le client, il a été identifié un certain nombre d’informations. Il doit être possible de :
+**Download Composer dependencies**
 
-consulter la liste des produits BileMo ;
-consulter les détails d’un produit BileMo ;
-consulter la liste des utilisateurs inscrits liés à un client sur le site web ;
-consulter le détail d’un utilisateur inscrit lié à un client ;
-ajouter un nouvel utilisateur lié à un client ;
-supprimer un utilisateur ajouté par un client.
-Seuls les clients référencés peuvent accéder aux API. Les clients de l’API doivent être authentifiés via OAuth ou JWT.
+Make sure you have [Composer installed](https://getcomposer.org/download/)
+and then run:
+
+```
+composer install
+```
+
+You may alternatively need to run `php composer.phar install`, depending
+on how you installed Composer.
+
+**Start the built-in web server**
+
+You can use Nginx or Apache, but Symfony's local web server
+works even better.
+
+To install the Symfony local web server, follow
+"Downloading the Symfony client" instructions found
+here: https://symfony.com/download - you only need to do this
+once on your system.
+
+Then, to start the web server, open a terminal, move into the
+project, and run:
+
+```
+symfony serve
+```
+
+(If this is your first time using this command, you may see an
+error that you need to run `symfony server:ca:install` first).
+
+Now check out the site at `https://localhost:8000`
+
+Have fun!
