@@ -9,13 +9,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity()
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={
+ *     "get"={
+ *     "normalization_context"={"groups"={"customer_listing:write"}}
+ *     },
+ *     "post"
+ *      },
  *     itemOperations={
  *     "get"={
- *          "normalization_context"={"groups"={"customer_listing:read", "customer_listing:item:get"}}
+ *          "normalization_context"={"groups"={"customer_listing:read", "customer_listing:item:get"}},
+ *          "access_control" = "is_granted('VIEW', previous_object)"
  *     },
- *     "patch",
- *     "delete",
+ *     "patch"={
+ *          "access_control" = "is_granted('EDIT', previous_object)"
+ *     },
+ *     "delete"={
+ *          "access_control" = "is_granted('DELETE', previous_object)"
+ *     },
  *     "put"
  *     },
  *     normalizationContext={"groups"={"customer_listing:read"}},
