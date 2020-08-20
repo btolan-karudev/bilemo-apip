@@ -9,6 +9,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity()
  * @ApiResource(
+ *     normalizationContext={"groups"={"customer_listing:read"}},
+ *     denormalizationContext={"groups"={"customer_listing:write"}},
+ *
  *     collectionOperations={
  *     "get"={
  *     "normalization_context"={"groups"={"customer_listing:write"}}
@@ -26,10 +29,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "delete"={
  *          "access_control" = "is_granted('DELETE', previous_object)"
  *     },
- *     "put"
- *     },
- *     normalizationContext={"groups"={"customer_listing:read"}},
- *     denormalizationContext={"groups"={"customer_listing:write"}}
+ *     "put"={
+ *           "access_control" = "is_granted('EDIT', previous_object)"
+ *     }
+ *     }
+ *
  * )
  */
 class Customer
@@ -43,18 +47,19 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
+     * @Groups({"customer_listing:read","customer_listing:write"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
+     * @Groups({"customer_listing:read","customer_listing:write"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"customer_listing:read","customer_listing:write"})
      */
     private $email;
 
@@ -66,7 +71,7 @@ class Customer
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customers")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:read","customer_listing:read","customer_listing:write"})
+     * @Groups({"customer_listing:read","customer_listing:write"})
      */
     private $user;
 
